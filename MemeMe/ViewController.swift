@@ -11,43 +11,68 @@ import UIKit
 
 // MARK: - ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
-    
+
     // MARK: Properties
     let hasCamera = UIImagePickerController.isSourceTypeAvailable(.camera)
     let defaultTextTOP = "TOP"
     let defaultTextBOTTOM = "BOTTOM"
     let memeTextAttributes: [String : Any] = [
-        NSAttributedStringKey.foregroundColor.rawValue : UIColor.white, //NSColor; NSForegroundColorAttributeName ok too
-        NSAttributedStringKey.strokeColor.rawValue: UIColor.black, //NSStrokeColor; NSStrokeColorAttributeName ok too
-        NSAttributedStringKey.strokeWidth.rawValue: 3, //NSStrokeWidth; NSStrokeWidthAttributeName ok too
-        // a decent approximation to “Impact.”
-        NSAttributedStringKey.font.rawValue: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)! // NSFont; NSFontAttributeName ok too
+        NSAttributedStringKey.foregroundColor.rawValue : UIColor.white,
+        NSAttributedStringKey.strokeColor.rawValue: UIColor.black,
+        NSAttributedStringKey.strokeWidth.rawValue: NSNumber(value: -3.0 as Float),
+        NSAttributedStringKey.font.rawValue: UIFont(name: "HelveticaNeue-CondensedBlack", size: 42)! //a decent approximation to “Impact” font
     ]
-    
-    
+
+
     // MARK: - Outlets
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var toolbarItemCamera: UIBarButtonItem!
+    @IBOutlet weak var itemShare: UIBarButtonItem!
+    @IBOutlet weak var itemReset: UIBarButtonItem!
+    @IBOutlet weak var itemCamera: UIBarButtonItem!
     @IBOutlet weak var topField: UITextField!
     @IBOutlet weak var bottomField: UITextField!
+    @IBOutlet weak var topToolbar: UIToolbar!
+    @IBOutlet weak var bottomToolbar: UIToolbar!
     
+
+    // MARK: - Construct Meme object and share/save it
+    func generateMemedImage() -> UIImage {
+        // Hide top and bottom toolbars
+        topToolbar.isHidden = true
+        bottomToolbar.isHidden = true
+        
+        // Render the view hierarchy into an image
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        self.view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+        let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        // Show top and bottom toolbars
+        topToolbar.isHidden = false
+        bottomToolbar.isHidden = false
+        
+        return memedImage
+    }
+
+    func saveMeme(memedImage: UIImage) {
+        if let originalImage = imageView.image, let topText = topField.text, let bottomText = bottomField.text {
+            let meme = Meme(topText: topText, bottomText: bottomText, originalImage: originalImage, memedImage: memedImage)
+            (UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
+            let memes = (UIApplication.shared.delegate as! AppDelegate).memes
+            print("Total number of saved memes: \(memes.count)")
+        }
+    }
+
     // MARK: - Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        toolbarItemCamera.isEnabled = hasCamera
+        itemShare.isEnabled = false
+        itemReset.isEnabled = false
+        itemCamera.isEnabled = hasCamera
         
-        topField.text = defaultTextTOP
-        topField.autocapitalizationType = .allCharacters
-        topField.defaultTextAttributes = memeTextAttributes
-        topField.textAlignment = .center
-        topField.delegate = self
-        
-        bottomField.text = defaultTextBOTTOM
-        bottomField.autocapitalizationType = .allCharacters
-        bottomField.defaultTextAttributes = memeTextAttributes
-        bottomField.textAlignment = .center
-        bottomField.delegate = self
+        configureTextField(topField, text: defaultTextTOP)
+        configureTextField(bottomField, text: defaultTextBOTTOM)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,8 +86,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         unsubscribeFromKeyboardNotifications()
     }
-    
-    // MARK: - Methods to shift the main view up when the keyboard appears
+
+
+    // MARK: - UI functions
+    fileprivate func configureTextField(_ textField: UITextField, text: String) {
+        textField.borderStyle = .none
+        textField.autocapitalizationType = .allCharacters
+        textField.textAlignment = .center
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.text = text
+        textField.delegate = self
+    }
+
+
+    // MARK: - Methods to shift the main view up/down when the keyboard shows/hides
     func subscribeToKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
@@ -90,6 +127,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return keyboardSize.cgRectValue.height
     }
 
+
     // MARK: - Actions
     @IBAction func pickImage(_ sender: Any) {
         let imagePicker = UIImagePickerController()
@@ -100,19 +138,42 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
         present(imagePicker, animated: true, completion: nil)
     }
-    
+
+    @IBAction func shareMeme(_ sender: Any) {
+        let memedImage = generateMemedImage()
+        let activityVC = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
+        activityVC.completionWithItemsHandler = {activity, success, items, error in
+            if success && error == nil {
+                self.saveMeme(memedImage: memedImage)
+            }
+        }
+        self.present(activityVC, animated: true, completion: nil)
+    }
+
+    @IBAction func itemResetPressed(_ sender: Any) {
+        topField.text = defaultTextTOP
+        bottomField.text = defaultTextBOTTOM
+        imageView.image = nil
+        itemShare.isEnabled = false
+        itemReset.isEnabled = false
+    }
+
+
     // MARK: UIImagePickerControllerDelegate methods
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         dismiss(animated: true, completion: nil)
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imageView.image = pickedImage
+            itemShare.isEnabled = true
+            itemReset.isEnabled = true
         }
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-    
+
+
     // MARK: - UITextFieldDelegate methods
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == topField {
