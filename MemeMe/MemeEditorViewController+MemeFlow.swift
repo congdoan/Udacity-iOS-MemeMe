@@ -16,8 +16,7 @@ extension MemeEditorViewController {
     // MARK: - Construct Meme object and share/save it
     func generateMemedImage() -> UIImage {
         // Hide top and bottom toolbars
-        topToolbar.isHidden = true
-        bottomToolbar.isHidden = true
+        toggleVisibilityOfToolbars(invisible: true)
         
         // Render the view hierarchy into an image
         UIGraphicsBeginImageContext(self.view.frame.size)
@@ -26,8 +25,7 @@ extension MemeEditorViewController {
         UIGraphicsEndImageContext()
         
         // Show top and bottom toolbars
-        topToolbar.isHidden = false
-        bottomToolbar.isHidden = false
+        toggleVisibilityOfToolbars(invisible: false)
         
         return memedImage
     }
@@ -37,6 +35,12 @@ extension MemeEditorViewController {
             let meme = Meme(topText: topText, bottomText: bottomText, originalImage: originalImage, memedImage: memedImage)
             (UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
         }
+    }
+
+    // MARK: Little helper function
+    func toggleVisibilityOfToolbars(invisible: Bool) {
+        topToolbar.isHidden = invisible
+        bottomToolbar.isHidden = invisible
     }
 
 }

@@ -13,7 +13,7 @@ import UIKit
 // MARK: - MemeEditorViewController: Keyboard Show/Hide Events Handling
 extension MemeEditorViewController {
 
-    // MARK: - Methods to shift the main view up/down when the keyboard shows/hides
+    // MARK: - Methods to slide the main view up/down when the keyboard shows/hides
     func subscribeToKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
@@ -27,8 +27,9 @@ extension MemeEditorViewController {
     
     @objc func keyboardWillShow(_ notification: Notification) {
         if bottomField.isFirstResponder {
-            // Shift the main view up when the keyboard shows
-            self.view.frame.origin.y -= getKeyboardHeight(notification)
+            // Slide the main view up when the keyboard shows
+            // https://discussions.udacity.com/t/better-way-to-shift-the-view-for-keyboardwillshow-and-keyboardwillhide/36558?u=coolshubh4
+            self.view.frame.origin.y = getKeyboardHeight(notification) * (-1)
         }
     }
     
