@@ -10,7 +10,7 @@ import UIKit
 
 
 // MARK: - ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     // MARK: Properties
     let hasCamera = UIImagePickerController.isSourceTypeAvailable(.camera)
