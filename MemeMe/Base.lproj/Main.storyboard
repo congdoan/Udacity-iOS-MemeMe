@@ -25,17 +25,20 @@
                                 </constraints>
                                 <items>
                                     <barButtonItem image="share" id="tom-vD-oDm">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <action selector="shareMeme:" destination="BYZ-38-t0r" id="J0B-9w-aMk"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="AQi-mE-dA1"/>
                                     <barButtonItem title="Reset" id="c4n-AT-qMy">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <action selector="itemResetPressed:" destination="BYZ-38-t0r" id="oG2-X5-gw9"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
+                                <color key="barTintColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="t81-ez-QyH">
                                 <rect key="frame" x="0.0" y="64" width="414" height="628"/>
@@ -59,17 +62,20 @@
                                 </constraints>
                                 <items>
                                     <barButtonItem tag="1" image="camera" id="cZI-Cq-DAh">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <action selector="pickImage:" destination="BYZ-38-t0r" id="wTe-KL-jWx"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="xB9-rD-vY7"/>
                                     <barButtonItem title="Album" id="ATY-j3-iwA" userLabel="Item Album">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <action selector="pickImage:" destination="BYZ-38-t0r" id="NDZ-kL-wlb"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
+                                <color key="barTintColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
                         </subviews>
                         <constraints>
