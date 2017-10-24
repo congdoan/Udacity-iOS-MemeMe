@@ -24,14 +24,14 @@
                                     <constraint firstAttribute="height" constant="44" id="r4l-7A-6Ja"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem image="share" id="tom-vD-oDm">
+                                    <barButtonItem systemItem="action" id="tom-vD-oDm">
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <action selector="shareMeme:" destination="BYZ-38-t0r" id="J0B-9w-aMk"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="AQi-mE-dA1"/>
-                                    <barButtonItem title="Reset" id="c4n-AT-qMy">
+                                    <barButtonItem systemItem="cancel" id="c4n-AT-qMy">
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <action selector="itemResetPressed:" destination="BYZ-38-t0r" id="oG2-X5-gw9"/>
@@ -44,13 +44,13 @@
                                 <rect key="frame" x="0.0" y="64" width="414" height="628"/>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gam-KP-NSQ">
-                                <rect key="frame" x="194.66666666666666" y="117.66666666666666" width="25" height="29.999999999999972"/>
+                                <rect key="frame" x="0.66666666666665719" y="117.66666666666666" width="414" height="29.999999999999972"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ur2-Ut-uqQ">
-                                <rect key="frame" x="194.66666666666666" y="588.33333333333337" width="25" height="30"/>
+                                <rect key="frame" x="0.33333333333334281" y="588.33333333333337" width="414" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -61,7 +61,7 @@
                                     <constraint firstAttribute="height" constant="44" id="hMw-x7-RBc"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem tag="1" image="camera" id="cZI-Cq-DAh">
+                                    <barButtonItem tag="1" systemItem="camera" id="cZI-Cq-DAh">
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <action selector="pickImage:" destination="BYZ-38-t0r" id="wTe-KL-jWx"/>
@@ -85,8 +85,10 @@
                             <constraint firstItem="N54-sj-ztB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Kqa-eN-nr7"/>
                             <constraint firstItem="N54-sj-ztB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Q75-iC-6WB"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="t81-ez-QyH" secondAttribute="trailing" id="WCB-gY-3sa"/>
+                            <constraint firstItem="Ur2-Ut-uqQ" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="Zdf-uX-Vic"/>
                             <constraint firstItem="OQq-3q-Tqu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="bqK-bU-Jh7"/>
                             <constraint firstItem="OQq-3q-Tqu" firstAttribute="top" secondItem="t81-ez-QyH" secondAttribute="bottom" id="d9J-cy-IbC"/>
+                            <constraint firstItem="gam-KP-NSQ" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="fe9-pm-t2O"/>
                             <constraint firstItem="Ur2-Ut-uqQ" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="g4h-jo-Ch9"/>
                             <constraint firstItem="t81-ez-QyH" firstAttribute="top" secondItem="N54-sj-ztB" secondAttribute="bottom" id="g7i-VB-ceY"/>
                             <constraint firstItem="t81-ez-QyH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="mqL-5x-0aQ"/>
@@ -112,8 +114,4 @@
             <point key="canvasLocation" x="32.799999999999997" y="87.706146926536732"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="camera" width="25" height="19"/>
-        <image name="share" width="19" height="27"/>
-    </resources>
 </document>

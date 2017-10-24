@@ -43,6 +43,7 @@ extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigatio
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        itemReset.isEnabled = (topField.text! != defaultTextTOP) || (bottomField.text! != defaultTextBOTTOM)
         return true
     }
     

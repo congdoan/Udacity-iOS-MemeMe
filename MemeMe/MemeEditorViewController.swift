@@ -64,8 +64,10 @@ class MemeEditorViewController: UIViewController {
     fileprivate func configureTextField(_ textField: UITextField, text: String) {
         textField.borderStyle = .none
         textField.autocapitalizationType = .allCharacters
-        textField.textAlignment = .center
         textField.defaultTextAttributes = memeTextAttributes
+        textField.adjustsFontSizeToFitWidth = true
+        textField.minimumFontSize = 28
+        textField.textAlignment = .center
         textField.text = text
         textField.delegate = self
     }

@@ -26,13 +26,17 @@ extension MemeEditorViewController {
     }
     
     @objc func keyboardWillShow(_ notification: Notification) {
-        // Shift the main view up when the keyboard shows
-        self.view.frame.origin.y -= getKeyboardHeight(notification)
+        if bottomField.isFirstResponder {
+            // Shift the main view up when the keyboard shows
+            self.view.frame.origin.y -= getKeyboardHeight(notification)
+        }
     }
     
     @objc func keyboardWillHide(_ notification: Notification) {
-        // Shift the main view back down when the keyboard hides
-        self.view.frame.origin.y = 0
+        if bottomField.isFirstResponder {
+            // Shift the main view back down when the keyboard hides
+            self.view.frame.origin.y = 0
+        }
     }
     
     func getKeyboardHeight(_ notification: Notification) -> CGFloat {
