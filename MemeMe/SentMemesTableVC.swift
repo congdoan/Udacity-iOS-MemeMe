@@ -36,7 +36,9 @@ class SentMemesTableVC: UITableViewController {
         memes = appDelegate.memes
         
         // Refresh
-        tableView!.reloadData()
+        tableView.reloadData()
+        
+        tableView.rowHeight = 100.0
     }
     
     // MARK: Add new Meme
@@ -56,21 +58,12 @@ class SentMemesTableVC: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MemeTableViewCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MemeTableViewCell", for: indexPath) as! MemeTableViewCell
 
         // Configure the cell
         let meme = memes[indexPath.row]
-        let dimensionInPoints = 120.0 * UIScreen.main.scale // ~ 120 pixels
-        let imageViewSize = CGSize(width: dimensionInPoints, height: dimensionInPoints)
-        UIGraphicsBeginImageContextWithOptions(imageViewSize, false, UIScreen.main.scale)
-        let imageView = cell.imageView!
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = meme.memedImage
-        let imageRect = CGRect(x: 0.0, y: 0.0, width: imageViewSize.width, height: imageViewSize.height)
-        imageView.image!.draw(in: imageRect)
-        imageView.image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        cell.textLabel?.text = "\(meme.topText) ... \(meme.bottomText)"
+        cell.memeImageView.image = meme.memedImage
+        cell.memeTextLabel.text = "\(meme.topText) ... \(meme.bottomText)"
 
         return cell
     }

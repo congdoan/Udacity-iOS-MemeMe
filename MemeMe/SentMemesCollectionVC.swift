@@ -54,7 +54,6 @@ class SentMemesCollectionVC: UICollectionViewController {
         let numberOfItemsInRow: CGFloat = UIDevice.current.orientation.isPortrait ? 3 : 5
         let numberOfSpacingsInRow: CGFloat = numberOfItemsInRow - 1
         let dimension = (viewWidth - (numberOfSpacingsInRow *  spacing)) / numberOfItemsInRow
-        print("setFlowLayoutProperties dimension = \(dimension)")
         flowLayout.minimumInteritemSpacing = spacing
         flowLayout.minimumLineSpacing = spacing
         flowLayout.itemSize = CGSize(width: dimension, height: dimension)
