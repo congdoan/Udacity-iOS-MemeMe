@@ -12,7 +12,7 @@ import UIKit
 // MARK: - MemeEditorVC: UIViewController
 class MemeEditorVC: UIViewController {
 
-    // MARK: Properties
+    // MARK: - Properties
     let hasCamera = UIImagePickerController.isSourceTypeAvailable(.camera)
     let defaultTextTOP = "TOP"
     let defaultTextBOTTOM = "BOTTOM"

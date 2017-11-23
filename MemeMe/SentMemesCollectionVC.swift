@@ -1,5 +1,5 @@
 //
-//  SentMemesCollectionVCCollectionViewController.swift
+//  SentMemesCollectionVC.swift
 //  MemeMe
 //
 //  Created by Cong Doan on 11/21/17.
@@ -9,17 +9,18 @@
 import UIKit
 
 
+// MARK: - SentMemesCollectionVC: UICollectionViewController
 class SentMemesCollectionVC: UICollectionViewController {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     var memes: [Meme]!
     
-    // MARK: Outlets
+    // MARK: - Outlets
     
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
 
-    // MARK: Life Cycle
+    // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +51,7 @@ class SentMemesCollectionVC: UICollectionViewController {
     
     // MARK: Set the Collection View Flow Layout's Properties
     
-    private func setFlowLayoutProperties(viewWidth: CGFloat) {
+    func setFlowLayoutProperties(viewWidth: CGFloat) {
         let spacing: CGFloat = 3.0
         let numberOfItemsInRow: CGFloat = UIDevice.current.orientation.isPortrait ? 3 : 5
         let numberOfSpacingsInRow: CGFloat = numberOfItemsInRow - 1
@@ -60,16 +61,7 @@ class SentMemesCollectionVC: UICollectionViewController {
         flowLayout.itemSize = CGSize(width: dimension, height: dimension)
     }
     
-    // MARK: Add new Meme
-    
-    @objc func addMeme() {
-        // Grab the Meme Editor View Controller from Storyboard
-        let memeEditorVC = storyboard?.instantiateViewController(withIdentifier: "MemeEditorVC") as! MemeEditorVC
-        // Pressent it modally
-        present(memeEditorVC, animated: true, completion: nil)
-    }
-
-    // MARK: UICollectionViewDataSource
+    // MARK: - Collection view data source
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return memes.count
@@ -85,15 +77,10 @@ class SentMemesCollectionVC: UICollectionViewController {
         return cell
     }
 
-    // MARK: UICollectionViewDelegate
+    // MARK: - Collection view delegate
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // Grab the Meme Detail View Controller from Storyboard
-        let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: "MemeDetailVC") as! MemeDetailVC
-        // Populate it with the data from the selected item
-        memeDetailVC.meme = memes[indexPath.row]
-        // Pressent it using navigation
-        navigationController?.pushViewController(memeDetailVC, animated: true)
+        showSelectedMeme(memes[indexPath.row])
     }
 
 }

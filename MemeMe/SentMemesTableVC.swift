@@ -8,21 +8,19 @@
 
 import UIKit
 
+
+// MARK: - SentMemesTableVC: UITableViewController
 class SentMemesTableVC: UITableViewController {
 
-    // MARK: Properties
+    // MARK: - Properties
     
     var memes: [Meme]!
     
     
+    // MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addMeme))
     }
@@ -40,15 +38,6 @@ class SentMemesTableVC: UITableViewController {
         tableView.rowHeight = 100.0
     }
     
-    // MARK: Add new Meme
-    
-    @objc func addMeme() {
-        // Grab the Meme Editor View Controller from Storyboard
-        let memeEditorVC = storyboard?.instantiateViewController(withIdentifier: "MemeEditorVC") as! MemeEditorVC
-        // Pressent it modally
-        present(memeEditorVC, animated: true, completion: nil)
-    }
-
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -69,12 +58,7 @@ class SentMemesTableVC: UITableViewController {
     // MARK: - Table view delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Grab the Meme Detail View Controller from Storyboard
-        let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: "MemeDetailVC") as! MemeDetailVC
-        // Populate it with the data from the selected item
-        memeDetailVC.meme = memes[indexPath.row]
-        // Pressent it using navigation
-        navigationController?.pushViewController(memeDetailVC, animated: true)
+        showSelectedMeme(memes[indexPath.row])
     }
 
 }
