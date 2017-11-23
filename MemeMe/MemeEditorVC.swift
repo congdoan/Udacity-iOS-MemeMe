@@ -1,5 +1,5 @@
 //
-//  MemeEditorViewController.swift
+//  MemeEditorVC.swift
 //  MemeMe
 //
 //  Created by Cong Doan on 10/21/17.
@@ -9,8 +9,8 @@
 import UIKit
 
 
-// MARK: - MemeEditorViewController: UIViewController
-class MemeEditorViewController: UIViewController {
+// MARK: - MemeEditorVC: UIViewController
+class MemeEditorVC: UIViewController {
 
     // MARK: Properties
     let hasCamera = UIImagePickerController.isSourceTypeAvailable(.camera)
@@ -109,15 +109,16 @@ class MemeEditorViewController: UIViewController {
             if success && error == nil {
                 self.saveMeme(memedImage: memedImage)
                 
-                // Pop the meme editor view controller off the navigation stack
-                self.navigationController?.popViewController(animated: true)
+                // Dismiss the meme editor view controller
+                self.dismiss(animated: true, completion: nil)
             }
         }
-        self.present(activityVC, animated: true, completion: nil)
+        present(activityVC, animated: true, completion: nil)
     }
 
     @IBAction func itemCancelPressed(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        // Dismiss the meme editor view controller
+        dismiss(animated: true, completion: nil)
     }
 
 }

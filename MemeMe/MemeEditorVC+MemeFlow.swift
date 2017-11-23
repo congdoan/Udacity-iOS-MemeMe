@@ -1,5 +1,5 @@
 //
-//  MemeEditorViewController+MemeFlow.swift
+//  MemeEditorVC+MemeFlow.swift
 //  MemeMe
 //
 //  Created by Cong Doan on 10/24/17.
@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 
-// MARK: - MemeEditorViewController: Meme Workflow related Functions
-extension MemeEditorViewController {
+// MARK: - MemeEditorVC: Meme Workflow related Functions
+extension MemeEditorVC {
 
     // MARK: - Construct Meme object and share/save it
     func generateMemedImage() -> UIImage {
@@ -33,11 +33,7 @@ extension MemeEditorViewController {
     func saveMeme(memedImage: UIImage) {
         if let originalImage = imageView.image, let topText = topField.text, let bottomText = bottomField.text {
             let meme = Meme(topText: topText, bottomText: bottomText, originalImage: originalImage, memedImage: memedImage)
-            //(UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
-            //TEST
-            for _ in 1...4 {
-                (UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
-            }
+            (UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
         }
     }
 

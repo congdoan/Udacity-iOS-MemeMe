@@ -1,5 +1,5 @@
 //
-//  MemeEditorViewController+Delegates.swift
+//  MemeEditorVC+Delegates.swift
 //  MemeMe
 //
 //  Created by Cong Doan on 10/24/17.
@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 
-// MARK: - MemeEditorViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate
-extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+// MARK: - MemeEditorVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate
+extension MemeEditorVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     // MARK: UIImagePickerControllerDelegate methods
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {

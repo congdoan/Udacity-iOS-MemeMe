@@ -24,7 +24,6 @@ class SentMemesCollectionVC: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Add rightBarButtonItem to navigationItem
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addMeme))
         
         setFlowLayoutProperties(viewWidth: view.frame.size.width)
@@ -64,11 +63,10 @@ class SentMemesCollectionVC: UICollectionViewController {
     // MARK: Add new Meme
     
     @objc func addMeme() {
-        // Grab the detail View Controller from Storyboard
-        let detailVC = storyboard?.instantiateViewController(withIdentifier: "MemeEditorViewController") as! MemeEditorViewController
-        
-        // Pressent it using navigation
-        navigationController?.pushViewController(detailVC, animated: true)
+        // Grab the Meme Editor View Controller from Storyboard
+        let memeEditorVC = storyboard?.instantiateViewController(withIdentifier: "MemeEditorVC") as! MemeEditorVC
+        // Pressent it modally
+        present(memeEditorVC, animated: true, completion: nil)
     }
 
     // MARK: UICollectionViewDataSource
@@ -90,14 +88,12 @@ class SentMemesCollectionVC: UICollectionViewController {
     // MARK: UICollectionViewDelegate
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // Grab the detail View Controller from Storyboard
-        let detailVC = storyboard?.instantiateViewController(withIdentifier: "MemeEditorViewController") as! MemeEditorViewController
-        
+        // Grab the Meme Detail View Controller from Storyboard
+        let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: "MemeDetailVC") as! MemeDetailVC
         // Populate it with the data from the selected item
-        detailVC.meme = memes[indexPath.row]
-        
+        memeDetailVC.meme = memes[indexPath.row]
         // Pressent it using navigation
-        navigationController?.pushViewController(detailVC, animated: true)
+        navigationController?.pushViewController(memeDetailVC, animated: true)
     }
 
 }

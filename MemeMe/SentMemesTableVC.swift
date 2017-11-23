@@ -24,7 +24,6 @@ class SentMemesTableVC: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
 
-        // Add rightBarButtonItem to navigationItem
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addMeme))
     }
     
@@ -44,11 +43,10 @@ class SentMemesTableVC: UITableViewController {
     // MARK: Add new Meme
     
     @objc func addMeme() {
-        // Grab the detail View Controller from Storyboard
-        let detailVC = storyboard?.instantiateViewController(withIdentifier: "MemeEditorViewController") as! MemeEditorViewController
-        
-        // Pressent it using navigation
-        navigationController?.pushViewController(detailVC, animated: true)
+        // Grab the Meme Editor View Controller from Storyboard
+        let memeEditorVC = storyboard?.instantiateViewController(withIdentifier: "MemeEditorVC") as! MemeEditorVC
+        // Pressent it modally
+        present(memeEditorVC, animated: true, completion: nil)
     }
 
     // MARK: - Table view data source
@@ -71,14 +69,12 @@ class SentMemesTableVC: UITableViewController {
     // MARK: - Table view delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Grab the detail View Controller from Storyboard
-        let detailVC = storyboard?.instantiateViewController(withIdentifier: "MemeEditorViewController") as! MemeEditorViewController
-        
+        // Grab the Meme Detail View Controller from Storyboard
+        let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: "MemeDetailVC") as! MemeDetailVC
         // Populate it with the data from the selected item
-        detailVC.meme = memes[indexPath.row]
-        
+        memeDetailVC.meme = memes[indexPath.row]
         // Pressent it using navigation
-        navigationController?.pushViewController(detailVC, animated: true)
+        navigationController?.pushViewController(memeDetailVC, animated: true)
     }
 
 }

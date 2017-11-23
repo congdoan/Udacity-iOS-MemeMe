@@ -1,5 +1,5 @@
 //
-//  MemeEditorViewController+Keyboard.swift
+//  MemeEditorVC+Keyboard.swift
 //  MemeMe
 //
 //  Created by Cong Doan on 10/24/17.
@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 
-// MARK: - MemeEditorViewController: Keyboard Show/Hide Events Handling
-extension MemeEditorViewController {
+// MARK: - MemeEditorVC: Keyboard Show/Hide Events Handling
+extension MemeEditorVC {
 
     // MARK: - Methods to slide the main view up/down when the keyboard shows/hides
     func subscribeToKeyboardNotifications() {
