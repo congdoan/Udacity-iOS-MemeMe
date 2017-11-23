@@ -35,7 +35,7 @@ class SentMemesTableVC: UITableViewController {
         // Refresh
         tableView.reloadData()
         
-        tableView.rowHeight = 100.0
+        tableView.rowHeight = 106.0
     }
     
     // MARK: - Table view data source

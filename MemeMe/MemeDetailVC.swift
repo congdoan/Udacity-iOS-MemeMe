@@ -37,6 +37,9 @@ class MemeDetailVC: UIViewController {
         memeEditorVC.meme = meme
         // Pressent it modally
         present(memeEditorVC, animated: true, completion: nil)
+        
+        // Pop the Meme Detail View Controller off the Navigation stack
+        navigationController?.popViewController(animated: true)
     }
 
 }
