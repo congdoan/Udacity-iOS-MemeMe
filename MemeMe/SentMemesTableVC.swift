@@ -75,7 +75,7 @@ class SentMemesTableVC: UITableViewController {
         let detailVC = storyboard?.instantiateViewController(withIdentifier: "MemeEditorViewController") as! MemeEditorViewController
         
         // Populate it with the data from the selected item
-        //detailVC.meme = memes[indexPath.row]
+        detailVC.meme = memes[indexPath.row]
         
         // Pressent it using navigation
         navigationController?.pushViewController(detailVC, animated: true)

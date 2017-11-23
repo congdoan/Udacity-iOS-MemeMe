@@ -19,7 +19,7 @@ extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigatio
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imageView.image = pickedImage
             itemShare.isEnabled = true
-            itemReset.isEnabled = true
+            itemCancel.isEnabled = true
         }
     }
     
@@ -43,7 +43,7 @@ extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigatio
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        itemReset.isEnabled = (topField.text! != defaultTextTOP) || (bottomField.text! != defaultTextBOTTOM)
+        itemCancel.isEnabled = (topField.text! != defaultTextTOP) || (bottomField.text! != defaultTextBOTTOM)
         return true
     }
     

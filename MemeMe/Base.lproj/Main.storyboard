@@ -194,7 +194,7 @@
                                     <barButtonItem systemItem="cancel" id="c4n-AT-qMy">
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <action selector="itemResetPressed:" destination="BYZ-38-t0r" id="oG2-X5-gw9"/>
+                                            <action selector="itemCancelPressed:" destination="BYZ-38-t0r" id="oG2-X5-gw9"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -263,7 +263,7 @@
                         <outlet property="bottomToolbar" destination="OQq-3q-Tqu" id="CL4-aD-uV1"/>
                         <outlet property="imageView" destination="t81-ez-QyH" id="Dkm-L3-K7r"/>
                         <outlet property="itemCamera" destination="cZI-Cq-DAh" id="0v9-c8-ahM"/>
-                        <outlet property="itemReset" destination="c4n-AT-qMy" id="qlt-nJ-gjs"/>
+                        <outlet property="itemCancel" destination="c4n-AT-qMy" id="qlt-nJ-gjs"/>
                         <outlet property="itemShare" destination="tom-vD-oDm" id="IEZ-VC-Hrr"/>
                         <outlet property="topField" destination="gam-KP-NSQ" id="Tx8-Uv-34k"/>
                         <outlet property="topToolbar" destination="N54-sj-ztB" id="G5u-mN-JRT"/>

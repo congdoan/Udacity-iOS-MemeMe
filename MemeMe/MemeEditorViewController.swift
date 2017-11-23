@@ -22,12 +22,14 @@ class MemeEditorViewController: UIViewController {
         NSAttributedStringKey.strokeWidth.rawValue: NSNumber(value: -3.0 as Float),
         NSAttributedStringKey.font.rawValue: UIFont(name: "HelveticaNeue-CondensedBlack", size: 42)! //a decent approximation to “Impact” font
     ]
+    
+    var meme: Meme?
 
 
     // MARK: - Outlets
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var itemShare: UIBarButtonItem!
-    @IBOutlet weak var itemReset: UIBarButtonItem!
+    @IBOutlet weak var itemCancel: UIBarButtonItem!
     @IBOutlet weak var itemCamera: UIBarButtonItem!
     @IBOutlet weak var topField: UITextField!
     @IBOutlet weak var bottomField: UITextField!
@@ -39,12 +41,17 @@ class MemeEditorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        itemShare.isEnabled = false
-        itemReset.isEnabled = false
         itemCamera.isEnabled = hasCamera
         
-        configureTextField(topField, text: defaultTextTOP)
-        configureTextField(bottomField, text: defaultTextBOTTOM)
+        if let meme = self.meme {
+            configureTextField(topField, text: meme.topText)
+            imageView.image = meme.originalImage
+            configureTextField(bottomField, text: meme.bottomText)
+        } else {
+            itemShare.isEnabled = false
+            configureTextField(topField, text: defaultTextTOP)
+            configureTextField(bottomField, text: defaultTextBOTTOM)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -109,12 +116,8 @@ class MemeEditorViewController: UIViewController {
         self.present(activityVC, animated: true, completion: nil)
     }
 
-    @IBAction func itemResetPressed(_ sender: Any) {
-        topField.text = defaultTextTOP
-        bottomField.text = defaultTextBOTTOM
-        imageView.image = nil
-        itemShare.isEnabled = false
-        itemReset.isEnabled = false
+    @IBAction func itemCancelPressed(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
     }
 
 }
