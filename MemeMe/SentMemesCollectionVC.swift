@@ -14,8 +14,8 @@ class SentMemesCollectionVC: UICollectionViewController {
     
     // MARK: - Properties
     
-    var memes: [Meme]!
-    
+    var appDelegate: AppDelegate!
+
     // MARK: - Outlets
     
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
@@ -25,19 +25,14 @@ class SentMemesCollectionVC: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        appDelegate = UIApplication.shared.delegate as! AppDelegate
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addMeme))
-        
         setFlowLayoutProperties(viewWidth: view.frame.size.width)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        // Initialize memes
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        memes = appDelegate.memes
-        
-        // Refresh
         collectionView!.reloadData()
     }
     
@@ -64,14 +59,14 @@ class SentMemesCollectionVC: UICollectionViewController {
     // MARK: - Collection view data source
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return memes.count
+        return appDelegate.memes.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MemeCollectionViewCell", for: indexPath) as! MemeCollectionViewCell
     
         // Configure the cell
-        let meme = memes[indexPath.row]
+        let meme = appDelegate.memes[indexPath.row]
         cell.memeImageView.image = meme.memedImage
     
         return cell
@@ -80,7 +75,7 @@ class SentMemesCollectionVC: UICollectionViewController {
     // MARK: - Collection view delegate
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        showSelectedMeme(memes[indexPath.row])
+        showSelectedMeme(appDelegate.memes[indexPath.row])
     }
 
 }

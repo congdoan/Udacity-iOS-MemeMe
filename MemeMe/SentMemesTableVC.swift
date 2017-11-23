@@ -14,7 +14,7 @@ class SentMemesTableVC: UITableViewController {
 
     // MARK: - Properties
     
-    var memes: [Meme]!
+    var appDelegate: AppDelegate!
     
     
     // MARK: - Life Cycle
@@ -22,33 +22,28 @@ class SentMemesTableVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        appDelegate = UIApplication.shared.delegate as! AppDelegate
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addMeme))
+        tableView.rowHeight = 106.0
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Initialize memes
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        memes = appDelegate.memes
-        
-        // Refresh
         tableView.reloadData()
-        
-        tableView.rowHeight = 106.0
     }
     
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return memes.count
+        return appDelegate.memes.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MemeTableViewCell", for: indexPath) as! MemeTableViewCell
 
         // Configure the cell
-        let meme = memes[indexPath.row]
+        let meme = appDelegate.memes[indexPath.row]
         cell.memeImageView.image = meme.memedImage
         cell.memeTextLabel.text = "\(meme.topText) ... \(meme.bottomText)"
 
@@ -57,7 +52,8 @@ class SentMemesTableVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            memes.remove(at: indexPath.row)
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.memes.remove(at: indexPath.row)
             tableView.reloadData()
         }
     }
@@ -65,7 +61,7 @@ class SentMemesTableVC: UITableViewController {
     // MARK: - Table view delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        showSelectedMeme(memes[indexPath.row])
+        showSelectedMeme(appDelegate.memes[indexPath.row])
     }
     
 }
