@@ -45,7 +45,7 @@
             </objects>
             <point key="canvasLocation" x="-1526" y="-121"/>
         </scene>
-        <!--Table-->
+        <!--Sent Memes-->
         <scene sceneID="vMT-hN-7LC">
             <objects>
                 <tableViewController id="wXJ-BB-5fw" customClass="SentMemesTableVC" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
@@ -54,12 +54,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemeTableViewCell" id="SLP-hD-N9I">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemeTableViewCell" textLabel="jQ3-Rt-MYX" style="IBUITableViewCellStyleDefault" id="SLP-hD-N9I">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SLP-hD-N9I" id="PHV-4S-A47">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jQ3-Rt-MYX">
+                                            <rect key="frame" x="20" y="0.0" width="374" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -69,7 +78,7 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Table" id="lyu-Tb-2Op"/>
-                    <navigationItem key="navigationItem" id="sFj-t2-dDS"/>
+                    <navigationItem key="navigationItem" title="Sent Memes" id="sFj-t2-dDS"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HIR-Vq-ugK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
