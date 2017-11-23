@@ -42,9 +42,11 @@ class SentMemesCollectionVC: UICollectionViewController {
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        setFlowLayoutProperties(viewWidth: size.width)
-        // Trigger re-layout using the newly set layout properties
-        flowLayout.invalidateLayout()
+        if flowLayout != nil {
+            setFlowLayoutProperties(viewWidth: size.width)
+            // Trigger re-layout using the newly set layout properties
+            flowLayout.invalidateLayout()
+        }
     }
     
     // MARK: Set the Collection View Flow Layout's Properties
