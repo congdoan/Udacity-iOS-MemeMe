@@ -51,17 +51,28 @@ class MemeEditorViewController: UIViewController {
         super.viewWillAppear(animated)
         
         subscribeToKeyboardNotifications()
+        
+        // Hide nav and tab bars
+        setHiddenStateOfBars(true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         unsubscribeFromKeyboardNotifications()
+        
+        // Show nav and tab bars
+        setHiddenStateOfBars(false)
     }
 
 
     // MARK: - UI functions
-    fileprivate func configureTextField(_ textField: UITextField, text: String) {
+    private func setHiddenStateOfBars(_ isHidden: Bool) {
+        navigationController?.isNavigationBarHidden = isHidden
+        tabBarController?.tabBar.isHidden = isHidden
+    }
+    
+    private func configureTextField(_ textField: UITextField, text: String) {
         textField.borderStyle = .none
         textField.autocapitalizationType = .allCharacters
         textField.defaultTextAttributes = memeTextAttributes
@@ -90,6 +101,9 @@ class MemeEditorViewController: UIViewController {
         activityVC.completionWithItemsHandler = {activity, success, items, error in
             if success && error == nil {
                 self.saveMeme(memedImage: memedImage)
+                
+                // Pop the meme editor view controller off the navigation stack
+                self.navigationController?.popViewController(animated: true)
             }
         }
         self.present(activityVC, animated: true, completion: nil)

@@ -33,7 +33,11 @@ extension MemeEditorViewController {
     func saveMeme(memedImage: UIImage) {
         if let originalImage = imageView.image, let topText = topField.text, let bottomText = bottomField.text {
             let meme = Meme(topText: topText, bottomText: bottomText, originalImage: originalImage, memedImage: memedImage)
-            (UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
+            //(UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
+            //TEST
+            for _ in 1...4 {
+                (UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
+            }
         }
     }
 
